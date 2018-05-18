@@ -107,3 +107,44 @@ list_RL1
 
 summary(list_RL1)
 str(list_RL1)
+
+#subsetting a list
+list_RL1$UnknownHours[1]
+list_RL1[[4]][1]
+
+list_RL1[1:3]
+list_RL1[c(1,4)]
+list_RL1[c("Machine", "Stats")]
+sublist_RL1 <- list_RL1[c(1,2)]
+sublist_RL1
+sublist_RL1[[2]][2]
+
+#double square brackets are not for subsetting
+#use to access to single component of list 
+#list_RL1[[1:3]] #ERROR
+
+list_RL1[1]
+
+#building a timeseries plot
+library(ggplot2)
+
+p <- ggplot(data=machine)
+p + geom_line(aes(x=PosixTime, y=Utilization, 
+                  colour=Machine), size=1.2) +
+                  facet_grid(Machine~.) +
+                  geom_hline(yintercept = 0.90,
+                         colour="Gray", size=1.2,
+                         linetype=3) #0.90 is the threshold why we highlight it.
+plot2 <- p + geom_line(aes(x=PosixTime, y=Utilization, 
+                           colour=Machine), size=1.2) +
+  facet_grid(Machine~.) +
+  geom_hline(yintercept = 0.90,
+             colour="Gray", size=1.2,
+             linetype=3)
+
+list_RL1$Plot <- plot2
+summary(list_RL1)
+str(list_RL1)
+
+
+
